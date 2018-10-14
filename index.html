@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<title>购物车示例</title>
+</head>
+<body>
+	<div id='app' v-cloak>
+		<form>
+			<input type="checkbox" :checked="selectList.length === listLength" @click="selectAll()">全选
+		</form>
+		<template v-if='list.length'>
+			<table>
+				<thead>
+					<tr>
+						<th></th>
+						<th>序号</th>
+						<th>商品名称</th>
+						<th>商品单价</th>
+						<th>购买数量</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<template v-for='(singleList,listIndex) in list'>
+					<tr v-for='(item, index) in singleList'>
+						<td>
+							<input type="checkbox" :checked="selectList.indexOf(item)>=0" @click='selectOne(item)'>
+						</td>
+						<td>{{ item.id }}</td>
+						<td>{{ item.name }}</td>
+						<td>{{ item.price }}</td>
+						<td>
+							<button
+								@click='handleReduce(listIndex,index)'
+								:disabled='item.count == 1'>-</button>
+							{{ item.count }}
+							<button @click='handleAdd(listIndex,index)'>+</button>
+						</td>
+						<td>
+							<button @click='handleRemove(listIndex,index)'>移除</button>
+						</td>
+					</tr>
+				</template>
+			</table>
+			<div>总价：￥{{totalPrice}}</div>
+		</template>
+		<div v-else>购物车为空！</div>
+	</div>
+	<script type="text/javascript" src="./vue.js"></script>
+	<script type="text/javascript" src="./index.js"></script>
+</body>
+</html>
