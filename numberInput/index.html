@@ -7,8 +7,13 @@
 </head>
 <body>
 	<div id='app'>
-		<input-number v-model='value' :max='110' :min='0' :step='2'></input-number>
+		<input-number @input='GG' v-model='value' :max='110' :min='0' :step='2'></input-number>
 	</div>
+	<script type="text/javascript">
+		GG(){
+			
+		}
+	</script>
 
 	<script src="./numberInput.js"></script>
 	<script src="./index.js"></script>
