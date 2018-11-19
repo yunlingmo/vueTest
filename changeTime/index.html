@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>自定义时间指令</title>	
+	<script src="./vue.js"></script>
+	<script src="./jquery.js"></script>
+</head>
+<body>
+	<div id = 'app'>
+		<!-- <div v-time="timeNow"></div>
+		<div v-time="timeBefore"></div> -->
+		<input  v-model="birthdayInput"/>
+		出生<span v-birthday="birthdayInput"></span> 天
+	</div>
+
+	<script src="./time.js"></script>
+	<script src="./index.js"></script>
+</body>
+</html>
