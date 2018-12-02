@@ -1,0 +1,31 @@
+.page-tab{
+	display: none;
+	cursor: pointer;
+}
+.page-active.page-tab{
+	display: block;
+}
+.contain{
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+.buttonClass{
+	border: 1px solid #8080807a;
+    border-radius: 4px;
+    padding: 2px 2px 2px 5px;
+    margin-left: 10px;
+}
+.backgroundRed{
+	background: red;
+}
+.backgroundGreen{
+	background: green;
+}
+.backgroundBlue{
+	background: blue;
+}
+.buttonClass.disableButton{
+	cursor:not-allowed;
+	cursor: not-allowed;
+	background: #ccc;
+}

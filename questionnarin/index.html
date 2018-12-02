@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>调查问卷</title>	
+	<script src="./vue.js"></script>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div id='app'>
+		<page :pageindex="pageindex1" title="第1页" :active-key="activeKey" @updateactivekey="updateActiveKeyEvent" @clearcontain="clearContainEvent">
+			<div slot='contain'>
+				<input type="radio" v-model="packed" value="read">看书
+				<input type="radio" v-model="packed" value="music">听音乐
+				<input type="radio" v-model="packed" value="exercise">运动
+			</div>
+			<div slot='footer'>
+				<buttonslef v-bind:button-style="buttons1" v-bind:color="color1" v-bind:button-able="buttonAble1"></buttonslef>
+			</div>
+		</page>
+		<page :pageindex="pageindex2" title="第2页" :active-key="activeKey" @updateactivekey="updateActiveKeyEvent" @clearcontain="clearContainEvent">
+			<div slot='contain'>
+				<input type="checkbox" v-model="checkboxed" value="eating"> 吃饭
+				<input type="checkbox" v-model="checkboxed" value="sleepting"> 睡觉
+				<input type="checkbox" v-model="checkboxed" value="studying"> 学习
+				<input type="checkbox" v-model="checkboxed" value="working"> 工作
+			</div>
+			<div slot='footer'>
+				<buttonslef v-bind:button-style="buttons2" v-bind:color="color2" v-bind:button-able="buttonAble2"> </buttonslef>
+			</div>
+		</page>
+		<page :pageindex="pageindex3" title="第3页" :active-key="activeKey" @updateactivekey="updateActiveKeyEvent" @clearcontain="clearContainEvent">		
+			<textarea slot='contain' v-model="textareaContain"></textarea>
+			<div slot='footer'>
+				<buttonslef v-bind:button-style="buttons3" v-bind:color="color3" v-bind:button-able="buttonAble3"></buttonslef>
+			</div>
+		</page>
+	</div>
+
+	<script src="./pages.js"></script>
+	<script src="./button.js"></script>
+	<script src="./index.js"></script>
+
+</body>
+</html>
+

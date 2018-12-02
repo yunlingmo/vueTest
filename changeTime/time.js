@@ -53,79 +53,88 @@
 // };
 
 var BirdthDay = {
-	data: function(){
-		var dataHash = {};
-		var days = inputDay.split('-');
-		dataHash.inputYear = days[0];
-		dataHash.inputMonth = days[1];
-		dataHash.inputDay = days[2];
+	// data: function(){
+	// 	var dataHash = {};
+	// 	var days = inputDay.split('-');
+	// 	dataHash.inputYear = days[0];
+	// 	dataHash.inputMonth = days[1];
+	// 	dataHash.inputDay = days[2];
 
-		var date = new Date();
-		dataHash.nowYear = date.getFullYear();
-		dataHash.nowMonth = date.getMonth()+1;
-		dataHash.nowDay = date.getDate();
-		return dataHash;
-	},
-	getyearType: function(year){
-		var yearType = '';
-		if(year%4==0 && year%100!=0 || year%400==0){
-			yearType = 'ruinian';
-		}else{
-			yearType = 'pingnian';
-		};
-		return yearType;
-	},
-	getDays1: function(inputDay){
-		var days = inputDay.split('-');
-		var inputYear = days[0];
-		var inputMonth = days[1];
-		var inputDay = days[2];
-		var totalDays1 = 0;
-		for(let i=inputMonth; i<=12; i++){
-			if(i==1 || i==3 || i==5 || i==7 || i==8 || i==10 || i==12){
-				totalDays1 += 31;
-			}else if(i==4 || i==6 || i==9 || i==11){
-				totalDays1 += 30;
-			}else if(i == 2){
-				var yearType = this.getyearType(inputYear);
-				totalDays1 += (yearType == 'pingnian' ? 28 :29);
-			};
-			return totalDays1 - inputDay;
-		}
-	},
-	getDays2: function(){
-		var date = new Date();
-		var nowYear = date.getFullYear();
-		var nowMonth = date.getMonth()+1;
-		var nowDay = date.getDate();
-		var totalDays2 = 0;
-		for(let i=1; i<=nowMonth; i++){
-			if(i==1 || i==3 || i==5 || i==7 || i==8 || i==10 || i==12){
-				totalDays2 += 31;
-			}else if(i==4 || i==6 || i==9 || i==11){
-				totalDays2 += 30;
-			}else if(i == 2){
-				var yearType = this.getyearType(nowYear);
-				totalDays2 += (yearType == 'pingnian' ? 28 : 29);
-			};
-			return totalDays2 + totalDays2;
-		}
-	},
-	getDays3: function(inputDay){
-		var date = new Date();
-		var nowYear = date.getFullYear();
-		var days = inputDay.split('-');
-		var inputYear = days[0];
-		var totalDay3 = 0;
-		for(let sd = inputYear+1; sd<nowYear; sd++){
-			var yearType = this.getyearType(nowYear);
-			totalDay3 += (yearType == 'pingnian' ? 365 : 366);
-		};
-		return totalDay3;
-	},
+	// 	var date = new Date();
+	// 	dataHash.nowYear = date.getFullYear();
+	// 	dataHash.nowMonth = date.getMonth()+1;
+	// 	dataHash.nowDay = date.getDate();
+	// 	return dataHash;
+	// },
+	// getyearType: function(year){
+	// 	var yearType = '';
+	// 	if(year%4==0 && year%100!=0 || year%400==0){
+	// 		yearType = 'ruinian';
+	// 	}else{
+	// 		yearType = 'pingnian';
+	// 	};
+	// 	return yearType;
+	// },
+	// getDays1: function(inputDay){
+	// 	var days = inputDay.split('-');
+	// 	var inputYear = days[0];
+	// 	var inputMonth = days[1];
+	// 	var inputDay = days[2];
+	// 	var totalDays1 = 0;
+	// 	for(let i=inputMonth; i<=12; i++){
+	// 		if(i==1 || i==3 || i==5 || i==7 || i==8 || i==10 || i==12){
+	// 			totalDays1 += 31;
+	// 		}else if(i==4 || i==6 || i==9 || i==11){
+	// 			totalDays1 += 30;
+	// 		}else if(i == 2){
+	// 			var yearType = this.getyearType(inputYear);
+	// 			totalDays1 += (yearType == 'pingnian' ? 28 :29);
+	// 		};
+	// 		return totalDays1 - inputDay;
+	// 	}
+	// },
+	// getDays2: function(){
+	// 	var date = new Date();
+	// 	var nowYear = date.getFullYear();
+	// 	var nowMonth = date.getMonth()+1;
+	// 	var nowDay = date.getDate();
+	// 	var totalDays2 = 0;
+	// 	for(let i=1; i<=nowMonth; i++){
+	// 		if(i==1 || i==3 || i==5 || i==7 || i==8 || i==10 || i==12){
+	// 			totalDays2 += 31;
+	// 		}else if(i==4 || i==6 || i==9 || i==11){
+	// 			totalDays2 += 30;
+	// 		}else if(i == 2){
+	// 			var yearType = this.getyearType(nowYear);
+	// 			totalDays2 += (yearType == 'pingnian' ? 28 : 29);
+	// 		};
+	// 		return totalDays2 + totalDays2;
+	// 	}
+	// },
+	// getDays3: function(inputDay){
+	// 	var date = new Date();
+	// 	var nowYear = date.getFullYear();
+	// 	var days = inputDay.split('-');
+	// 	var inputYear = days[0];
+	// 	var totalDay3 = 0;
+	// 	for(let sd = inputYear+1; sd<nowYear; sd++){
+	// 		var yearType = this.getyearType(nowYear);
+	// 		totalDay3 += (yearType == 'pingnian' ? 365 : 366);
+	// 	};
+	// 	return totalDay3;
+	// },
 	getBirthDays: function(inputday){
-		var totalDays = this.getDays1(inputday) + this.getDays2() + this.getDays3(inputday);
-		return totalDays;
+		var nowday = new Date();
+		var days = inputday.split('-');
+		var firstDay = new Date();
+		firstDay.setFullYear(days[0]);
+		firstDay.setMonth(days[1]-1);
+		firstDay.setDate(days[2]);
+
+		var shijancha  = nowday.getTime() - firstDay.getTime();
+		var chaDay = Math.ceil(shijancha/1000/60/60/24);
+		// var totalDays = this.getDays1(inputday) + this.getDays2() + this.getDays3(inputday);
+		return chaDay;
 	}
 };
 
