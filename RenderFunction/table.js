@@ -11,19 +11,29 @@ Vue.component('vTable',{
 			default: function(){
 				return [];
 			}
-		}
+		},
+		currentWidth: {
+			type: Array,
+			default: function(){
+				return [];
+			}
+		},
+
 	},
 	data: function(){
 		return {
 			currentColumns: [],
-			currentData: []
+			currentData: [],
+			starChange: false,
+			startX: 0
 		}
 	},
 	render: function(h){
 		var _this = this;
 		var ths = [];
 		var trs = [];
-		this.currentData.forEach( function(row) {
+		var cols = [];
+		this.currentData.forEach( function(row,index) {
 			var tds = [];
 			_this.currentColumns.forEach( function(cel) {
 				tds.push(h('td',row[cel.key]));
@@ -32,8 +42,26 @@ Vue.component('vTable',{
 		});
 
 		this.currentColumns.forEach( function(col, index) {
+			var changeFunction = {};
+			var className = "";
+			cols.push(h('col',{
+				attrs: {style:_this.showStyle(index)},
+			}));
+			if(col.changeWidth){
+				changeFunction = {
+						mousedown: function(){
+							_this.onmousedownEvent(index)
+						}
+				};
+				className = 'resizeClass';
+			};
 			if(col.sortable){
-				ths.push(h('th',[
+				ths.push(h('th'						
+					,[
+						h('span',{
+							on:changeFunction,
+							class:className,
+						}),
 						h('span',col.title),
 						h('a',{
 							class: {
@@ -57,11 +85,18 @@ Vue.component('vTable',{
 						},'↓'),
 					]))
 			}else{
-				ths.push(h('th',col.title));
-			}
+				
+				ths.push(h('th',[
+						h('span',{
+							on:changeFunction,
+							class:className
+						}),
+						h('span',col.title)]));
+			};
 		});
 
 		return h('table',[
+					h('colgroup',cols),
 					h('thead',[
 						h('tr',ths)
 					]),
@@ -72,6 +107,7 @@ Vue.component('vTable',{
 		makeColumns: function(){
 			this.currentColumns = this.columns.map(function(col,index){
 				col._sortType = 'normal';
+				col._changeWidth = false;
 				col._index = index;
 				return col;
 			})
@@ -81,6 +117,10 @@ Vue.component('vTable',{
 				row._index = index;
 				return row;
 			})
+		},
+		showStyle: function(index){
+			var width = this.currentWidth[index];
+			return 'width:'+ width+'px;'
 		},
 		handleSortByAsc: function(index){
 			var key = this.currentColumns[index].key;
@@ -101,7 +141,13 @@ Vue.component('vTable',{
 			this.currentData.sort(function(a,b){
 				return a[key] < b[key] ? 1 : -1;
 			});
-		}
+		},
+		onmousedownEvent: function(index){
+			var changeFlag = true;
+			this.startX = event.clientX;
+			this.$emit('change-width',index,this.startX,changeFlag);
+			console.log('onmousedownEvent',index,this.startX,changeFlag)
+		},
 	},
 	mounted (){
 		this.makeColumns();

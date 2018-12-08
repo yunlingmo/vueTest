@@ -1,8 +1,16 @@
 [v-cloak]{
 	display: none
 }
-table{
+html{
+	height: 100%;
 	width: 100%;
+}
+#bigbody{
+	height: 100%;
+	width: 100%;
+}
+table{
+	/* width: 100%; */
 	margin-bottom: 24px;
 	border-collapse: collapse;
 	border-spacing: 0;
@@ -14,6 +22,8 @@ table th{
 	color: #5c6b77;
 	font-size: 600;
 	white-space: nowrap;
+	position: relative;
+	overflow: hidden;
 }
 table th,table td{
 	padding: 8px 16px;
@@ -30,4 +40,13 @@ table th a.on{
 }
 table th a:hover{
 	color: #3399ff;
+}
+.resizeClass{
+	width: 5px;
+	height: 100px;
+	position: absolute;
+	background: transparent;
+	cursor: col-resize;
+	top: 0;
+    right: 0;
 }

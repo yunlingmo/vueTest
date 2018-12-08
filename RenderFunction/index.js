@@ -1,6 +1,7 @@
 var app = new Vue({
 	el: '#app',
 	data: {
+		currentWidth: [100,200,300,400],
 		columns: [
 			{
 				title: '姓名',
@@ -18,7 +19,8 @@ var app = new Vue({
 			},
 			{
 				title: '地址',
-				key: 'address'
+				key: 'address',
+				changeWidth:true,
 			}
 		],
 		data: [
@@ -39,5 +41,21 @@ var app = new Vue({
 				address: '傻狗路66号'
 			}
 		]
-	}
+	},
+	methods:{
+		changeWidth(index,startwisth,changeFlag){
+				var widthSize = this.currentWidth[index];		
+				document.onmousemove = function(event){	
+					if(changeFlag){
+						var xpoint = event.clientX;
+						var newWidth = xpoint - startwisth + widthSize;
+						Vue.set(app.currentWidth, index, newWidth);
+					}
+				};			
+			document.onmouseup = function(){
+				changeFlag = false;
+			};
+		}
+	},
+
 });

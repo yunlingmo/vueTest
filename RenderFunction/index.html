@@ -7,7 +7,8 @@
 </head>
 <body>
 	<div id="app" v-cloak>
-		<v-table  :columns="columns" :data="data"></v-table>
+		<div id="bigboy"></div>
+		<v-table  @change-width='changeWidth' :current-width='currentWidth' :columns="columns" :data="data"></v-table>
 	</div>
 	<script src="./vue.js"></script>
 	<script src="./table.js"></script>
